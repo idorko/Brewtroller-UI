@@ -1,0 +1,111 @@
+#The BTnic module implements the BTnic protocol
+#for usage over a serial connection.
+
+require 'rubygems'
+require 'serialport'
+
+module BTnic
+	
+	public
+	#connection methods
+	def open_connection(port, baud)
+		@@sp = SerialPort.new(port, baud)
+		@@sp_read = SerialPort.new(port, baud)
+	end
+		
+	#BTnic methods
+	def get_boil_temp
+		@@sp.write("A")
+		return get_data("A")
+	end
+	
+	def get_volume_calibrations(vessel_index)
+		check_vessel(vessel_index)
+		code = "B"+vessel_index
+		@@sp.write(code)
+		return get_data(code)
+	end 	
+
+	def get_evap_rate 
+		@@sp.write("C")
+		return get_data("C")
+	end	
+	
+	def get_output_settings(vessel_index)
+		check_vessel(vessel_index)
+		code = "D"+vessel_index
+		@@sp.write(code)
+		return get_data(code)
+	end
+
+	def get_program_settings(prog_num)
+		check_prog(prog_num)
+		code = "E" + prog_num
+		@@sp.write(code)
+		return get_data(code)
+	end
+
+	def get_temperature_sensor_address(vessel_index)
+		check_vessel(vessel_index)
+		code = "F"+vessel_index
+		@@sp.write(code)
+		return get_data(code)
+	end
+
+	def get_version_information
+		@@sp.write("G")
+		return get_data("G")
+	end
+
+	def get_volume_settings(vessel_index)
+		check_vessel(vessel_index)
+		code = "H"+vessel_index
+		@@sp.write(code)
+		return get_data(code) 
+	end
+
+	def initialize_eeprom
+		@@sp.write("I")
+		return get_data("I") 
+	end
+
+	def scan_for_temperature_sensor
+		@@sp‪.write("J")
+		return get_data("J")
+	end
+
+	def set_boil_temp(temp)
+		code = "K" + temp
+		@@sp.write(code)
+		return get_data
+	end
+
+	private
+
+	#data retrieval 
+	def get_data(code)
+		data=""
+		#get response code and data
+		response_code = @@sp_read.getc.chr
+		puts response_code
+		while ((char = @@sp_read.getc) != 13) do
+			data += char.chr
+		end
+		validate_data(response_code, code)
+	end
+
+	#error checking
+	def validate_data(reponse_code, code)
+		raise TypeError, "Response code mismatch." if (response_code != code)	
+	end
+
+	def check_vessel(vessel)
+		raise TypeError, "Invalid vessel index." if (vessel < 1 || vessel > 3)
+	end
+
+	def check_prog(prog)
+		raise TypeError, "Invalid program index." if (prog < 0 || prog > 19)
+	end
+	
+end
+  

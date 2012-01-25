@@ -1,8 +1,8 @@
-module BeerXML
 require 'rexml/document'
 require "./utility.rb"
 include Conversions
 
+module BeerXML
 
 		@@names = []
 		@@mash_temps = []
