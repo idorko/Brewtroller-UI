@@ -21,17 +21,20 @@ class MyFrame < Frame
 		@import_row.add(@import_button)	
 		
 		@mash_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
-		@prog_sizer = Wx::BoxSizer.new(Wx::HORIZONTAL)
-		
+		#@prog_sizer = Wx::BoxSizer.new(Wx::HORIZONTAL)
+		@prog_num_sizer = Wx::BoxSizer.new(Wx::HORIZONTAL)
+		@prog_num_sizer.add(Wx::StaticText.new(self, -1, "Program Number:"), 0, Wx::ALIGN_CENTER, 0)
+		@prog_num_sizer.add(@prog_num = Wx::Choice.new(self, :choices => %w(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)), 0, Wx::ALIGN_CENTER, 0)
 		@main_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
 		@main_sizer.add(@title_row, 0, Wx::ALIGN_CENTER, 0)
+		@main_sizer.add(@prog_num_sizer, 0, Wx::ALIGN_CENTER, 0)
 		@main_sizer.add(@mash_sizer, 0, Wx::ALIGN_CENTER, 0)
 		@main_sizer.add(@prog_sizer, 0, Wx::ALIGN_CENTER, 0)
-		@main_sizer.add(@import_row, 0, Wx::ALIGN_CENTER, 0)
 		@mash_sizer.add(@port = Wx::TextCtrl.new(self, -1, "Input Serial Port Location."), 1, EXPAND, 0)
 		@mash_sizer.add(@download_button = Wx::Button.new(self, -1, "Download to BrewTroller"), 0, Wx::ALIGN_CENTER,0)
 		@download_button.enable(false)
 		evt_button(@download_button) { |event| download()}
+		@main_sizer.add(@import_row, 0, Wx::ALIGN_CENTER, 0)
 
 		@main_sizer.add(@exit_button = Wx::Button.new(self, -1, "Exit"), 0, Wx::ALIGN_CENTER, 0)
 		evt_button(@exit_button) {|event| exit()}
