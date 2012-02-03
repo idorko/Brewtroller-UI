@@ -50,7 +50,20 @@ class MyFrame < Frame
 		#setup BTnic parameters, test connection
 		BTnic.set_port(@port.get_value())
 		BTnic.set_baud(115200)
-		BTnic.get_boil_temp
+		#BTnic.get_boil_temp
+		
+		#parse mash steps into bt command string, send down
+		command = "#{@prog_num.get_selection().to_s()}\t#{BeerXML.get_names.to_s}\t"
+		for i in 0..5
+			#put in mash steps
+			if i <= (BeerXML.get_mash_temps.size-1)
+				command+="#{BeerXML.get_mash_temps[i].to_s}\t#{BeerXML.get_mash_times[i].to_s}\t"
+			else 
+				command +="0\t0\t"
+			end
+		end 
+		command += "#{BeerXML.get_sparge_temp().to_s}\t"
+		puts command
 		
 	end	
 	
