@@ -35,6 +35,7 @@ class MyFrame < Frame
 
 		@main_sizer.add(@exit_button = Wx::Button.new(self, -1, "Exit"), 0, Wx::ALIGN_CENTER, 0)
 		evt_button(@exit_button) {|event| exit()}
+		@main_sizer.add(@error = Wx::StaticText.new(self, -1, ""), 1, EXPAND, 0)
 		set_sizer @main_sizer
 		show
 		
@@ -78,6 +79,18 @@ class MyFrame < Frame
 	end
 end
 
+class ErrorWindow < Wx::MiniFrame
+	def new(message)
+		super	
+		@error_window=Wx::Window.new
+		@error_window.add(Wx::StaticText.new(self, -1, message), 1, EXPAND, 0)
+				
+		@error_window.add(@close_button = Wx::Button.new(self, -1, "Close"), 0, Wx::ALIGN_CENTER, 0)
+		evt_button(@close_button) {|event| self.close()}
+		show		
+	end
+end
+
 class MyApp < App
 
 	def on_init
@@ -87,7 +100,15 @@ class MyApp < App
 	def on_run
 		super
 		rescue Exception => e
-			puts e.message
+			if e.message == "exit"
+				exit()
+			end
+			md = Wx::MessageDialog.new(
+				nil,
+				"Error: #{e.message}",
+				"Error",
+				Wx::ICON_INFORMATION)
+			md.show_modal
 			retry
 	end
 end
