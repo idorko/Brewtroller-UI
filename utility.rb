@@ -4,7 +4,7 @@ module Conversions
 		for i in 0..temp.size-1
 			temp[i] = temp[i].to_f
 			temp[i] = temp[i] * 9/5 + 32
-			temp[i] = temp[i].to_s
+			temp[i] = temp[i].round.to_s
 		end
 	end
 end
