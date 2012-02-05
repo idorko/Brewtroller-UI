@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<resource xmlns="http://www.wxwindows.org/wxxrc" version="2.3.0.1">
+	<object class="wxFrame" name="MainFrame">
+		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
+		<size>1000,550</size>
+		<title>BeerXML2BrewTroller</title>
+		<centered>1</centered>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_title">
+							<label>BeerXML2BrewTroller</label>
+						</object>
+					</object>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxEXPAND | wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticLine" name="m_staticline1">
+							<style>wxLI_HORIZONTAL</style>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="load">
+							<label>Import BeerXML</label>
+							<default>0</default>
+						</object>
+					</object>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticLine" name="m_staticline3">
+					<style>wxLI_HORIZONTAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_staticText17">
+							<label>Name:</label>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxTextCtrl" name="m_textCtrl3">
+							<size>200,-1</size>
+							<value></value>
+							<maxlength>0</maxlength>
+						</object>
+					</object>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxGridSizer">
+					<rows>2</rows>
+					<cols>2</cols>
+					<vgap>0</vgap>
+					<hgap>0</hgap>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxGridSizer">
+							<rows>6</rows>
+							<cols>3</cols>
+							<vgap>0</vgap>
+							<hgap>0</hgap>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText20">
+									<label>Mash Step</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="temp_label">
+									<label>Temperature (F)</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText22">
+									<style>wxTAB_TRAVERSAL</style>
+									<label>Time (min)</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText23">
+									<label>Dough In</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="doughin_temp">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="doughin_time">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText24">
+									<label>Acid</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="acid_temp">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="acid_time">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText25">
+									<label>Protein</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="protein_temp">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="protein_time">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText26">
+									<label>Sacch</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="sacch_temp">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="sach_time">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText27">
+									<label>Sacch2</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="sacch2_temp">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="sacch2_time">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticText28">
+									<label>Mash Out</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="mash_out_temp">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="mash_out_time">
+									<value>0</value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxGridSizer">
+							<rows>1</rows>
+							<cols>1</cols>
+							<vgap>0</vgap>
+							<hgap>0</hgap>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label">
+											<label>Sparge Temperature (F):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="sparge_temp">
+											<value>168</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label1">
+											<label>HLT Setpoint (F):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="hlt_setpoint">
+											<value>168</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="batch_vol_label">
+											<label>Batch Volume (gal):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="batch_vol">
+											<value>10</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="grain_label">
+											<label>Grain Weight (lbs)</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="grain_weight">
+											<value>20</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label11">
+											<label>Boil Time (mins):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="boil_time">
+											<value>60</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label12">
+											<label>Mash Ratio (1/100ths):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="hlt_setpoint1">
+											<value>500</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label13">
+											<label>Pitch Temperature (F):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="pitch_temp">
+											<value>70</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label14">
+											<label>Boil Additions (bit mask):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="boil_additions">
+											<value>0</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="sparge_label15">
+											<label>Mash Liquor Heat Source (HLT, MASH):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL</flag>
+										<border>5</border>
+										<object class="wxTextCtrl" name="hlt_setpoint2">
+											<value>HLT</value>
+											<maxlength>0</maxlength>
+										</object>
+									</object>
+									<object class="spacer">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<size>0,0</size>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticLine" name="m_staticline4">
+					<style>wxLI_HORIZONTAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_staticText51">
+							<label>Serial Port:</label>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxTextCtrl" name="port">
+							<value>COM1</value>
+							<maxlength>0</maxlength>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_staticText291">
+							<label>Program #:</label>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxChoice" name="prog_choice1">
+							<selection>0</selection>
+							<content>
+								<item>1</item>
+								<item>2</item>
+								<item>3</item>
+								<item>4</item>
+								<item>5</item>
+								<item>6</item>
+								<item>7</item>
+								<item>8</item>
+								<item>9</item>
+								<item>10</item>
+								<item>11</item>
+								<item>12</item>
+								<item>13</item>
+								<item>14</item>
+								<item>15</item>
+								<item>16</item>
+								<item>17</item>
+								<item>18</item>
+								<item>19</item>
+								<item>20</item>
+							</content>
+						</object>
+					</object>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="download">
+							<label>Download to BrewTroller</label>
+							<default>0</default>
+						</object>
+					</object>
+					<object class="spacer">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<size>0,0</size>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+</resource>
