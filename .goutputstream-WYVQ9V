@@ -1,14 +1,11 @@
-#!/usr/bin/ruby
 require 'rubygems'
 require 'wx'
 require 'gui_class'
-require 'nokogiri'
-require 'beerxmlnew'
+require 'beerxml'
 require 'BTNic'
 
 include BeerXML
 include BTnic
-
 class BeerXML2BrewTroller < TextFrameBase
 	
 	def initialize
@@ -20,7 +17,7 @@ class BeerXML2BrewTroller < TextFrameBase
 	def import_program()
 		fd = Wx::FileDialog.new(self, "Choose a file...", "~/"," ", "*.xml", Wx::FD_OPEN)
 		fd.show_modal
-		fn = fd.get_filename()		
+		fn = fd.get_filename()
 		BeerXML.parse_mash(fn)
 		
 		m_textctrl3.value = BeerXML.get_names[0].to_s
@@ -37,29 +34,18 @@ class BeerXML2BrewTroller < TextFrameBase
 		mash_out_time.value = BeerXML.get_mash_times[5].to_s
 		mash_out_temp.value = BeerXML.get_mash_temps[5].to_s	
 		sparge_temp.value = BeerXML.get_sparge_temp[0].to_s
-		batch_vol.value = BeerXML.get_volumes[0].to_f.round.to_s
-		grain_weight.value = BeerXML.get_other_params[0].to_f.round.to_s
-		boil_time.value = BeerXML.get_other_params[1].to_s
-		hlt_setpoint1.value = ((BeerXML.get_other_params[2].to_f*100).round).to_s
-		pitch_temp.value = BeerXML.get_other_temps[0].to_s
 
 	end	
 	
 	def download_program()
-		#run one code to flush serial buffer
-		#determine HLT or MASH
-		if hlt_setpoint2.get_value == "HLT"
-			hltormash = 0
-		else
-			hltormash = 1
-		end	
+			
 		#parse control string
-		control = "#{m_textctrl3.get_value}\t#{doughin_temp.get_value()}\t#{doughin_time.get_value()}\t#{acid_temp.get_value}\t#{acid_time.get_value}\t#{protein_temp.get_value()}\t#{protein_time.get_value}\t#{sacch_temp.get_value}\t#{sach_time.get_value}\t#{sacch2_temp.get_value}\t#{sacch2_time.get_value}\t#{mash_out_temp.get_value}\t#{mash_out_time.get_value}\t#{sparge_temp.get_value}\t#{hlt_setpoint.get_value}\t#{batch_vol.get_value+"000"}\t#{grain_weight.get_value+"000"}\t#{boil_time.get_value}\t#{hlt_setpoint1.get_value}\t#{pitch_temp.get_value}\t#{boil_additions.get_value}\t#{hltormash}"
+		control = "#{m_textctrl3.get_value}\t#{dougin_temp.get_value()}\t#{doughin_time.get_value()}\t#{acid_temp.get_value}\t#{acid_time.get_value}\t#{protein_temp.get_value()}\t#{protein_time.get_value}\t#{sacch_temp.get_value}\t#{sach_time.get_value}\t#{sacch2_temp.get_value}\t#{sacch2_time.get_value}\t#{mash_out_temp.get_value}\t#{mash_out_time.get_value}\t#{sparge_temp.get_value}\t#{hlt_setpoint.get_value}\t#{batch_vol.get_value}\t#{grain_weight.get_value}\t#{boil_time.get_value}\t#{hlt_setpoint1.get_value}\t#{pitch_temp.get_value}\t#{boil_additions.get_value}\t#{hlt_setpoint2.get_value}"
+		puts control
 
 		#download to brewtroller
 		BTnic.set_baud(115200)
 		BTnic.set_port(port.get_value)
-		BTnic.get_boil_temp()
 		BTnic.set_program_settings(prog_choice1.get_selection, control)
 	end
 end

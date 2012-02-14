@@ -35,7 +35,7 @@
             <property name="pos"></property>
             <property name="size">1000,550</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
-            <property name="subclass"></property>
+            <property name="subclass">TextFrameBase; </property>
             <property name="title">BeerXML2BrewTroller</property>
             <property name="tooltip"></property>
             <property name="validator_data_type"></property>

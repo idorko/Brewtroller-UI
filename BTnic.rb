@@ -463,7 +463,7 @@ module BTnic
 	def get_data(code, sp)
 		#add terminiating character, send code
 		code += "\r"
-		puts code
+#		puts code
 		sp.print(code)
 		data = sp.readline("\r\n")
 		raise TypeError, "\n No data recieved." if data == nil
@@ -475,7 +475,7 @@ module BTnic
 
 	#error checking
 	def validate_data(code, data)
-		puts code, data[1]
+#		puts code, data[1]
 		if(data[1]!=code)
 			if data[1] == '!'
 				raise TypeError, "Invalid Command.\n"
