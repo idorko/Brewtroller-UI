@@ -1,4 +1,4 @@
-require "./beerxml.rb"
+require "./beerxmlnew.rb"
 require "./BTnic.rb"
 include BTnic
 include BeerXML

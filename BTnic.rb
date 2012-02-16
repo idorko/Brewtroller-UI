@@ -452,7 +452,12 @@ module BTnic
 	private
 	#connection methods
 	def open_connection(port, baud)
-		return sp = SerialPort.new(port, baud)
+		sp = SerialPort.new(port, baud)
+		#read timeout or sp hangs
+		#sp.read_timeout = 2000
+		#return initialization string that brewtroller sends on reset
+		sp.readline("\r\n")
+		return sp
 	end
 	
 	def close_connection(sp)
@@ -467,7 +472,7 @@ module BTnic
 		sp.print(code)
 		data = sp.readline("\r\n")
 		raise TypeError, "\n No data recieved." if data == nil
-
+#		puts data
 		#parse data
 		parsed_data = data.split("\t")
 		return parsed_data

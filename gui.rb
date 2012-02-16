@@ -1,8 +1,8 @@
 #!/usr/bin/ruby
+$LOAD_PATH.unshift File.dirname($0)
 require 'rubygems'
 require 'wx'
 require 'gui_class'
-require 'nokogiri'
 require 'beerxmlnew'
 require 'BTNic'
 
@@ -20,7 +20,7 @@ class BeerXML2BrewTroller < TextFrameBase
 	def import_program()
 		fd = Wx::FileDialog.new(self, "Choose a file...", "~/"," ", "*.xml", Wx::FD_OPEN)
 		fd.show_modal
-		fn = fd.get_filename()		
+		fn = fd.get_directory + "\\" +fd.get_filename()		
 		BeerXML.parse_mash(fn)
 		
 		m_textctrl3.value = BeerXML.get_names[0].to_s
@@ -46,6 +46,7 @@ class BeerXML2BrewTroller < TextFrameBase
 	end	
 	
 	def download_program()
+		download.disable
 		#run one code to flush serial buffer
 		#determine HLT or MASH
 		if hlt_setpoint2.get_value == "HLT"
@@ -59,8 +60,9 @@ class BeerXML2BrewTroller < TextFrameBase
 		#download to brewtroller
 		BTnic.set_baud(115200)
 		BTnic.set_port(port.get_value)
-		BTnic.get_boil_temp()
+	#	BTnic.get_boil_temp()
 		BTnic.set_program_settings(prog_choice1.get_selection, control)
+		download.enable
 	end
 end
 
@@ -94,7 +96,9 @@ class MyApp < Wx::App
 				"Error",
 				Wx::ICON_INFORMATION)
 			md.show_modal
+			
 			retry
+		
 	end
 end
 
