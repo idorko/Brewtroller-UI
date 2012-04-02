@@ -452,8 +452,8 @@ module BTnic
 
 
 	#connection methods
-	def open_connection(port, baud)
-		@@sp = SerialPort.new(port, baud)
+	def open_connection
+		@@sp = SerialPort.new(@@port, @@baud)
 		#read timeout or @@sp hangs
 		@@sp.read_timeout = 2000
 		#return initialization string that brewtroller sends on reset

@@ -1,5 +1,5 @@
 require "./beerxmlnew.rb"
-require "./BTnic_updated.rb"
+require "./BTnic.rb"
 include BTnic
 include BeerXML
 
@@ -17,8 +17,8 @@ puts BTnic.get_port
 BTnic.set_baud(115200)
 puts BTnic.get_baud
 BTnic.open_connection
-puts (BTnic.get_boil_temp).map { |i| i.to_s}.join(",")
-puts (BTnic.get_boil_temp).map { |i| i.to_s}.join(",")
-puts (BTnic.get_boil_temp).map { |i| i.to_s}.join(",")
-puts (BTnic.get_boil_temp).map { |i| i.to_s}.join(",")
+for i in 1..120
+	puts i.to_s << " " << BTnic.get_temperature("BOIL").map { |i| i.to_s}.join(",")
+	sleep(1)
+end
 puts "Done"
