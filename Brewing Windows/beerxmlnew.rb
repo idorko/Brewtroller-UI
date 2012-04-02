@@ -1,5 +1,5 @@
 require 'rexml/document'
-require "./utility.rb"
+require 'utility.rb'
 include Conversions
 
 module BeerXML

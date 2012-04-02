@@ -3,8 +3,9 @@
 	<object class="wxFrame" name="MainFrame" subclass="TextFrameBase">
 		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
 		<size>1000,550</size>
-		<title>BeerXML2BrewTroller</title>
+		<title>BeerXML2BrewTroller v1.0.0</title>
 		<centered>1</centered>
+		<aui_managed>0</aui_managed>
 		<object class="wxBoxSizer">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
@@ -25,6 +26,7 @@
 						<border>5</border>
 						<object class="wxStaticText" name="m_title">
 							<label>BeerXML2BrewTroller</label>
+							<wrap>-1</wrap>
 						</object>
 					</object>
 					<object class="spacer">
@@ -106,6 +108,7 @@
 						<border>5</border>
 						<object class="wxStaticText" name="m_staticText17">
 							<label>Name:</label>
+							<wrap>-1</wrap>
 						</object>
 					</object>
 					<object class="sizeritem">
@@ -150,6 +153,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText20">
 									<label>Mash Step</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -158,6 +162,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="temp_label">
 									<label>Temperature (F)</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -167,6 +172,7 @@
 								<object class="wxStaticText" name="m_staticText22">
 									<style>wxTAB_TRAVERSAL</style>
 									<label>Time (min)</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -175,6 +181,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText23">
 									<label>Dough In</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -201,6 +208,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText24">
 									<label>Acid</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -227,6 +235,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText25">
 									<label>Protein</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -253,6 +262,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText26">
 									<label>Sacch</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -279,6 +289,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText27">
 									<label>Sacch2</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -305,6 +316,7 @@
 								<border>5</border>
 								<object class="wxStaticText" name="m_staticText28">
 									<label>Mash Out</label>
+									<wrap>-1</wrap>
 								</object>
 							</object>
 							<object class="sizeritem">
@@ -354,6 +366,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label">
 											<label>Sparge Temperature (F):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -391,6 +404,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label1">
 											<label>HLT Setpoint (F):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -428,6 +442,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="batch_vol_label">
 											<label>Batch Volume (gal):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -465,6 +480,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="grain_label">
 											<label>Grain Weight (lbs)</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -502,6 +518,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label11">
 											<label>Boil Time (mins):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -539,6 +556,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label12">
 											<label>Mash Ratio (1/100ths):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -576,6 +594,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label13">
 											<label>Pitch Temperature (F):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -613,6 +632,7 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label14">
 											<label>Boil Additions (bit mask):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
@@ -650,15 +670,19 @@
 										<border>5</border>
 										<object class="wxStaticText" name="sparge_label15">
 											<label>Mash Liquor Heat Source (HLT, MASH):</label>
+											<wrap>-1</wrap>
 										</object>
 									</object>
 									<object class="sizeritem">
 										<option>0</option>
 										<flag>wxALL</flag>
 										<border>5</border>
-										<object class="wxTextCtrl" name="hlt_setpoint2">
-											<value>HLT</value>
-											<maxlength>0</maxlength>
+										<object class="wxChoice" name="hlt_setpoint2">
+											<selection>0</selection>
+											<content>
+												<item>HLT</item>
+												<item>MASH</item>
+											</content>
 										</object>
 									</object>
 									<object class="spacer">
@@ -699,6 +723,7 @@
 						<border>5</border>
 						<object class="wxStaticText" name="m_staticText51">
 							<label>Serial Port:</label>
+							<wrap>-1</wrap>
 						</object>
 					</object>
 					<object class="sizeritem">
@@ -714,8 +739,35 @@
 						<option>0</option>
 						<flag>wxALL</flag>
 						<border>5</border>
+						<object class="wxStaticText" name="m_staticText231">
+							<label>Baud Rate:</label>
+							<wrap>-1</wrap>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxChoice" name="baud">
+							<selection>6</selection>
+							<content>
+								<item>2400</item>
+								<item>4800</item>
+								<item>9600</item>
+								<item>19200</item>
+								<item>38400</item>
+								<item>57600</item>
+								<item>115200</item>
+							</content>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
 						<object class="wxStaticText" name="m_staticText291">
 							<label>Program #:</label>
+							<wrap>-1</wrap>
 						</object>
 					</object>
 					<object class="sizeritem">
@@ -767,6 +819,15 @@
 						<flag>wxEXPAND</flag>
 						<border>5</border>
 						<size>0,0</size>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="upload">
+							<label>Upload from BrewTroller</label>
+							<default>0</default>
+						</object>
 					</object>
 					<object class="sizeritem">
 						<option>0</option>

@@ -22,15 +22,15 @@ class TextFrameBase < Wx::Frame
               :boil_time, :sparge_label12, :hlt_setpoint1,
               :sparge_label13, :pitch_temp, :sparge_label14,
               :boil_additions, :sparge_label15, :hlt_setpoint2,
-              :m_staticline4, :m_statictext51, :port,
-              :m_statictext291, :prog_choice1, :download
+              :m_staticline4, :m_statictext51, :port, :m_statictext231, :baud, 
+              :m_statictext291, :prog_choice1, :upload, :download 
 	
 	def initialize(parent = nil)
 		super()
 		xml = Wx::XmlResource.get
 		xml.flags = 2 # Wx::XRC_NO_SUBCLASSING
 		xml.init_all_handlers
-		xml.load("noname.xrc")
+		xml.load(File.join(File.dirname(__FILE__), "noname.xrc"))
 		xml.load_frame_subclass(self, parent, "MainFrame")
 
 		finder = lambda do | x | 
@@ -92,9 +92,13 @@ class TextFrameBase < Wx::Frame
 		@m_staticline4 = finder.call("m_staticline4")
 		@m_statictext51 = finder.call("m_staticText51")
 		@port = finder.call("port")
+		@m_statictext231 = finder.call("m_staticText231")
+		@baud = finder.call("baud")
 		@m_statictext291 = finder.call("m_staticText291")
 		@prog_choice1 = finder.call("prog_choice1")
 		@download = finder.call("download")
+		@upload = finder.call("upload")
+
 		if self.class.method_defined? "on_init"
 			self.on_init()
 		end
