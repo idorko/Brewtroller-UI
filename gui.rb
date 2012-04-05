@@ -35,21 +35,36 @@ class LogFrame < Wx::Frame
 		
 		#set up data log timer
 		timer = Wx::Timer.new(self, Wx::ID_ANY)
-		evt_timer(timer.id) {log_data(fn)}
-		timer.start(5000)
+		evt_timer(timer.id) { |event| log_data(fn)}
+		timer.start(30000)
+		
+		#set up focus event
+		evt_set_focus() { |event| load_graph() }
+	end
+	
+	def load_graph()
+		img_file = File.join( File.dirname(__FILE__), 'output.gif')
+		@image = Wx::Image.new(img_file)
+		@image = @image.to_bitmap
+		self.paint do |dc|
+			dc.draw_bitmap(@image,0,0,false)
+		end
 	end
 	
 	def log_data(fn)
-			#get and process data	
+		#get and process data	
 		puts fn
 		puts @i
-		@temperatures[0] << BTnic.get_temperature("HLT")[2].chop.insert(2,'.').to_f
-		@temperatures[1] << BTnic.get_temperature("MASH")[2].chop.insert(2,'.').to_f 
-		@temperatures[2] << BTnic.get_temperature("BOIL")[2].chop.insert(2,'.').to_f
+		@temperatures[0] << BTnic.get_temperature("HLT")[2].chop.to_f/100
+		@temperatures[1] << BTnic.get_temperature("MASH")[2].chop.to_f/100
+		@temperatures[2] << 55 #BTnic.get_temperature("BOIL")[2].chop.to_f/100
 		@x << @i
 		File.open(fn, 'a') {|f| f.write("#{@i}, #{@temperatures[0].last}, #{@temperatures[1].last}, #{@temperatures[2].last}\n") }
+		puts @temperatures[0].last
+		puts @temperatures[1].last
+		puts @temperatures[2].last
 		@i+=1
-
+		
 		#generate plot
 		Gnuplot.open do |gp|	
 			Gnuplot::Plot.new( gp ) do |plot|

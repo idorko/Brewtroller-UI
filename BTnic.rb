@@ -483,7 +483,14 @@ module BTnic
 
 	#error checking
 	def validate_data(code, data)
-#		puts code, data[1]
+		#workaround for BT sending back 1
+		puts "#{data}test"
+		if (puts data[0] == "1\r\n")
+			code += "r"
+			data = get_data(code)
+			return
+		end
+		puts code, data[0], data[1]
 		if(data[1]!=code)
 			if data[1] == '!'
 				raise TypeError, "Invalid Command.\n"
@@ -496,7 +503,6 @@ module BTnic
 			end
 		end
 	end
-
 	def get_vessel_index(vessel)
 		if vessel == "HLT"
 			return 0
