@@ -14,7 +14,7 @@ include BTnic
 class LogFrame < Wx::Frame
 	
 	def initialize(title, baud, port)
-		super(nil, :title => title, :size => [640, 480])
+		super(nil, :title => title, :size => [640, 500])
 		@i = 0.0
 		@temperatures = [[],[],[]]
 		@x = []	
