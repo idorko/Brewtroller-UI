@@ -15,19 +15,23 @@ class LogFrame < Wx::Frame
 	
 	def initialize(title, baud, port)
 		super(nil, :title => title, :size => [640, 480])
-		@i = 0
+		@i = 0.0
 		@temperatures = [[],[],[]]
 		@x = []	
-	
-	
-		#get file to save
-		fd = Wx::FileDialog.new(self, "Save data where?", "~/"," ","*.csv", Wx::FD_SAVE)
+		
+		#save csv file
+		fd = Wx::FileDialog.new(self, "Save raw data where?", "~/","data","*.csv", Wx::FD_SAVE)
 		fd.show_modal
 		fn = fd.get_directory + "\\" +fd.get_filename()	
 		f = File.open(fn, 'w')
 		f.write("TIME, HLT, MASH, BOIL\n")
 		f.close
 		
+		fd = Wx::FileDialog.new(self, "Save graph where?", "", "output","*.gif", Wx::FD_SAVE)
+		fd.show_modal
+		fn_graph = fd.get_filename()	
+		f = File.open(fn_graph, 'r')
+		f.close
 		#open connection to BT
 		BTnic.set_baud(baud)
 		BTnic.set_port(port)
@@ -35,15 +39,16 @@ class LogFrame < Wx::Frame
 		
 		#set up data log timer
 		timer = Wx::Timer.new(self, Wx::ID_ANY)
-		evt_timer(timer.id) { |event| log_data(fn)}
+		evt_timer(timer.id) { |event| log_data(fn, fn_graph)}
 		timer.start(30000)
 		
 		#set up focus event
-		evt_set_focus() { |event| load_graph() }
+		evt_set_focus() { |event| load_graph(fn_graph) }
+		evt_close() { |event| BTnic.close_connection; self.destroy }
 	end
 	
-	def load_graph()
-		img_file = File.join( File.dirname(__FILE__), 'output.gif')
+	def load_graph(fn)
+		img_file = File.join( File.dirname(__FILE__), fn)
 		@image = Wx::Image.new(img_file)
 		@image = @image.to_bitmap
 		self.paint do |dc|
@@ -51,18 +56,13 @@ class LogFrame < Wx::Frame
 		end
 	end
 	
-	def log_data(fn)
+	def log_data(fn, fn_graph)
 		#get and process data	
-		puts fn
-		puts @i
 		@temperatures[0] << BTnic.get_temperature("HLT")[2].chop.to_f/100
 		@temperatures[1] << BTnic.get_temperature("MASH")[2].chop.to_f/100
-		@temperatures[2] << 55 #BTnic.get_temperature("BOIL")[2].chop.to_f/100
-		@x << @i
+		@temperatures[2] << BTnic.get_temperature("BOIL")[2].chop.to_f/100
+		@x << @i/2
 		File.open(fn, 'a') {|f| f.write("#{@i}, #{@temperatures[0].last}, #{@temperatures[1].last}, #{@temperatures[2].last}\n") }
-		puts @temperatures[0].last
-		puts @temperatures[1].last
-		puts @temperatures[2].last
 		@i+=1
 		
 		#generate plot
@@ -76,6 +76,9 @@ class LogFrame < Wx::Frame
 			plot.title "Brew Session Temperatures"
 			plot.ylabel "Temperature (F)"
 			plot.xlabel "Time (min)"
+			plot.arbitrary_lines << "set grid x y"
+			plot.arbitrary_lines << "set mytics 5"
+			plot.arbitrary_lines << 'set xlabel "Time (min)"'
 			plot.data = [
 				Gnuplot::DataSet.new( [@x, @temperatures[0]] ) {|ds| 
 					ds.with = "linespoints"
@@ -93,7 +96,7 @@ class LogFrame < Wx::Frame
 			end
 		end
 		#display image
-		img_file = File.join( File.dirname(__FILE__), 'output.gif')
+		img_file = File.join( File.dirname(__FILE__), fn_graph)
 		@image = Wx::Image.new(img_file)
 		@image = @image.to_bitmap
 		self.paint do |dc|
@@ -116,7 +119,6 @@ class BeerXML2BrewTroller < TextFrameBase
 		#create log window
 			@log_window = LogFrame.new("Temperature Log", BAUD[baud.get_selection], port.get_value )
 			@log_window.show
-			#@log_window.log_data(fn)
 	end
 	
 	def import_program()
@@ -146,12 +148,13 @@ class BeerXML2BrewTroller < TextFrameBase
 		pitch_temp.value = BeerXML.get_other_temps[0].to_s
 		download.enable
 		upload.enable
+		log.enable
 	end	
 	
 	def upload_program()
 		download.disable
 		upload.disable
-		
+		log.disable
 		BTnic.set_baud(BAUD[baud.get_selection])
 		BTnic.set_port(port.get_value)
 		BTnic.open_connection
@@ -183,9 +186,11 @@ class BeerXML2BrewTroller < TextFrameBase
 		BTnic.close_connection
 		download.enable
 		upload.enable
+		log.enable
 	end
 	
 	def download_program()
+		log.disable
 		download.disable
 		upload.disable
 		#run one code to flush serial buffer
@@ -199,8 +204,10 @@ class BeerXML2BrewTroller < TextFrameBase
 		BTnic.open_connection
 	#	BTnic.get_boil_temp()
 		BTnic.set_program_settings(prog_choice1.get_selection, control)
+		
 		download.enable
 		upload.enable
+		log.enable
 		BTnic.close_connection
 	end
 end
@@ -226,16 +233,16 @@ class MyApp < Wx::App
 	def on_run
 		super
 		#rescue Exception => e
-			#if e.message == "exit"
-			#	exit()
-			#end
-			#md = Wx::MessageDialog.new(
-			#	nil,
-			#	"Error: #{e.message}",
-			#	"Error",
-			#	Wx::ICON_INFORMATION)
-			#md.show_modal
-			#retry
+		#	if e.message == "exit"
+		#		exit()
+		#	end
+		#	md = Wx::MessageDialog.new(
+		#		nil,
+		#		"Error: #{e.message}",
+		#		"Error",
+		#		Wx::ICON_INFORMATION)
+		#	md.show_modal
+		#	retry
 		
 	end
 end

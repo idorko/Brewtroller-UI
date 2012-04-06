@@ -677,9 +677,12 @@
 										<option>0</option>
 										<flag>wxALL</flag>
 										<border>5</border>
-										<object class="wxTextCtrl" name="hlt_setpoint2">
+										<object class="wxComboBox" name="hlt_setpoint2">
 											<value>HLT</value>
-											<maxlength>0</maxlength>
+											<content>
+												<item>HLT</item>
+												<item>MASH</item>
+											</content>
 										</object>
 									</object>
 									<object class="spacer">

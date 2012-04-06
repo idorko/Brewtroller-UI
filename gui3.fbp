@@ -4445,7 +4445,7 @@
                                             <property name="border">5</property>
                                             <property name="flag">wxALL</property>
                                             <property name="proportion">0</property>
-                                            <object class="wxTextCtrl" expanded="1">
+                                            <object class="wxComboBox" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -4456,6 +4456,7 @@
                                                 <property name="caption"></property>
                                                 <property name="caption_visible">1</property>
                                                 <property name="center_pane">0</property>
+                                                <property name="choices">&quot;HLT&quot; &quot;MASH&quot;</property>
                                                 <property name="close_button">1</property>
                                                 <property name="context_help"></property>
                                                 <property name="context_menu">1</property>
@@ -4474,7 +4475,6 @@
                                                 <property name="max_size"></property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
-                                                <property name="maxlength">0</property>
                                                 <property name="min_size"></property>
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
@@ -4504,6 +4504,7 @@
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
                                                 <event name="OnChar"></event>
+                                                <event name="OnCombobox"></event>
                                                 <event name="OnEnterWindow"></event>
                                                 <event name="OnEraseBackground"></event>
                                                 <event name="OnKeyDown"></event>
@@ -4527,8 +4528,6 @@
                                                 <event name="OnSize"></event>
                                                 <event name="OnText"></event>
                                                 <event name="OnTextEnter"></event>
-                                                <event name="OnTextMaxLen"></event>
-                                                <event name="OnTextURL"></event>
                                                 <event name="OnUpdateUI"></event>
                                             </object>
                                         </object>

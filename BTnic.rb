@@ -475,22 +475,23 @@ module BTnic
 		@@sp.print(code)
 		data = @@sp.readline("\r\n")
 		raise TypeError, "\n No data recieved." if data == nil
-		#puts data
+	
+
 		#parse data
 		parsed_data = data.split("\t")
+		#workaround for BT sending back 1
+		#basically get new data point.
+		if (parsed_data[0] == "1\r\n")
+			data = @@sp.readline("\r\n")
+			parsed_data = data.split("\t")
+		end
+		
 		return parsed_data
 	end
 
 	#error checking
 	def validate_data(code, data)
-		#workaround for BT sending back 1
-		puts "#{data}test"
-		if (puts data[0] == "1\r\n")
-			code += "r"
-			data = get_data(code)
-			return
-		end
-		puts code, data[0], data[1]
+		
 		if(data[1]!=code)
 			if data[1] == '!'
 				raise TypeError, "Invalid Command.\n"
