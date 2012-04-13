@@ -12,9 +12,15 @@ include BeerXML
 include BTnic
 
 class LogFrame < Wx::Frame
+	#graph file for usage outside of frame
+	@@fn_graph = nil
+	
+	def get_graph
+		@@fn_graph
+	end
 	
 	def initialize(title, baud, port)
-		super(nil, :title => title, :size => [640, 500])
+		super(nil, :title => title, :size => [640, 510])
 		@i = 0.0
 		@temperatures = [[],[],[]]
 		@x = []	
@@ -29,9 +35,29 @@ class LogFrame < Wx::Frame
 		
 		fd = Wx::FileDialog.new(self, "Save graph where?", "", "output","*.gif", Wx::FD_SAVE)
 		fd.show_modal
-		fn_graph = fd.get_filename()	
-		f = File.open(fn_graph, 'r')
-		f.close
+		fn_graph = fd.get_directory + "\\" + fd.get_filename()	
+		@@fn_graph = fn_graph
+		#create initial plot
+		Gnuplot.open do |gp|	
+			Gnuplot::Plot.new( gp ) do |plot|
+				#image output
+				plot.terminal "gif"
+				plot.output File.expand_path(fn_graph, __FILE__)
+				#ploting stuff
+				plot.xrange "[0:1]"
+				plot.title "Brew Session Temperatures"
+				plot.ylabel "Temperature (F)"
+				plot.xlabel "Time (min)"
+				plot.arbitrary_lines << "set grid x y"
+				plot.arbitrary_lines << "set mytics 5"
+				plot.arbitrary_lines << 'set xlabel "Time (min)"'
+				plot.data << Gnuplot::DataSet.new( [[0], [0]] ) {|ds| 
+					ds.with = "linespoints"
+					ds.title = "HLT"
+				}
+			end
+		end
+
 		#open connection to BT
 		BTnic.set_baud(baud)
 		BTnic.set_port(port)
@@ -48,8 +74,8 @@ class LogFrame < Wx::Frame
 	end
 	
 	def load_graph(fn)
-		img_file = File.join( File.dirname(__FILE__), fn)
-		@image = Wx::Image.new(img_file)
+		#img_file = File.join( File.dirname(__FILE__), fn)
+		@image = Wx::Image.new(fn)
 		@image = @image.to_bitmap
 		self.paint do |dc|
 			dc.draw_bitmap(@image,0,0,false)
@@ -70,7 +96,7 @@ class LogFrame < Wx::Frame
 			Gnuplot::Plot.new( gp ) do |plot|
 			#image output
 			plot.terminal "gif"
-			plot.output File.expand_path("../output.gif", __FILE__)
+			plot.output File.expand_path(fn_graph, __FILE__)
 			#ploting stuff
 			plot.xrange "[0:#{@temperatures[0].length}]"
 			plot.title "Brew Session Temperatures"
@@ -96,12 +122,7 @@ class LogFrame < Wx::Frame
 			end
 		end
 		#display image
-		img_file = File.join( File.dirname(__FILE__), fn_graph)
-		@image = Wx::Image.new(img_file)
-		@image = @image.to_bitmap
-		self.paint do |dc|
-			dc.draw_bitmap(@image,0,0,false)
-		end
+		load_graph(fn_graph)
 	end
 end
 class BeerXML2BrewTroller < TextFrameBase
@@ -119,6 +140,11 @@ class BeerXML2BrewTroller < TextFrameBase
 		#create log window
 			@log_window = LogFrame.new("Temperature Log", BAUD[baud.get_selection], port.get_value )
 			@log_window.show
+			@log_window.load_graph(@log_window.get_graph)
+			timer = Wx::Timer.new(self, Wx::ID_ANY)
+			evt_timer(timer.id) { |event| @log_window.load_graph(@log_window.get_graph)}
+			timer.start(100)
+			@log_window.evt_close { |event| timer.stop; BTnic.close_connection; @log_window.destroy }
 	end
 	
 	def import_program()
@@ -232,17 +258,17 @@ class MyApp < Wx::App
 	
 	def on_run
 		super
-		#rescue Exception => e
-		#	if e.message == "exit"
-		#		exit()
-		#	end
-		#	md = Wx::MessageDialog.new(
-		#		nil,
-		#		"Error: #{e.message}",
-		#		"Error",
-		#		Wx::ICON_INFORMATION)
-		#	md.show_modal
-		#	retry
+		rescue Exception => e
+			if e.message == "exit"
+				exit()
+			end
+			md = Wx::MessageDialog.new(
+				nil,
+				"Error: #{e.message}",
+				"Error",
+				Wx::ICON_INFORMATION)
+			md.show_modal
+			retry
 		
 	end
 end

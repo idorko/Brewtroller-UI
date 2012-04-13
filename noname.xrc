@@ -678,7 +678,7 @@
 										<flag>wxALL</flag>
 										<border>5</border>
 										<object class="wxComboBox" name="hlt_setpoint2">
-											<value>HLT</value>
+											<selection>0</selection>
 											<content>
 												<item>HLT</item>
 												<item>MASH</item>
